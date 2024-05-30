@@ -1,0 +1,36 @@
+plugins {
+    id('com.android.library')
+}
+
+android {
+    namespace 'com.iadb.api'
+    compileSdk api_target_sdk
+    defaultConfig {
+        minSdkVersion api_min_sdk
+        targetSdkVersion api_target_sdk
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildFeatures {
+        buildConfig false
+    }
+    buildTypes {
+        debug {
+            defaultConfig.minSdkVersion 30
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api project(':aidl')
+    api project(':shared')
+
+    implementation 'androidx.annotation:annotation:1.3.0'
+}
